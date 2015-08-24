@@ -2,50 +2,31 @@
 <html>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<style>
-    .progress {
-      height: 5px;
-	  width:20%;
-      padding: 1px;
-      background-color: #f5f5f5;
-      border: 1px solid #ffffff;
-      overflow: hidden;
-      margin-bottom: 1px;
-    }
-    .progress__bar {
-      display: block;
-      height: 5px;
-	  width:1%;
-      background: #D0D3D3;
-    }
-</style>
-	<script src="js/jquery-1.7.2.min.js"></script>
-	<script src="js/jquery-ui-1.8.21.custom.min.js"></script>
+<script src="js/jquery-1.7.2.min.js"></script>
+<script src="js/jquery-ui-1.8.21.custom.min.js"></script>
 <body>
-
-<video id="videoem" width="320" height="240" controls>
-  <source src="video/movie.mp4" type="video/mp4">
-  <source src="video/movie.ogg" type="video/ogg">
-  Your browser does not support the video tag.
-</video>
-<div id="progressBar" class="progress"><span id="progress" class="progress__bar"></span></div>
-<div id="controls" style="margin-top: 6px">   
-   <!--<i class="fa fa-play" id="play"  onclick="togglePlayPause()" style="cursor:pointer"></i> 
-   <i class="fa fa-pause" id="pause"  onclick="togglePlayPause()" style="cursor:pointer; visibility:hidden"></i>-->
-   <i class="fa fa-play" id="playpause"  onclick="togglePlayPause()" style="cursor:pointer"></i> 
-   <span id="duration"></span>
-   <section>	
-		<span class="tooltip"></span> <!-- Tooltip -->
-		<div id="slider" ></div> <!-- the Slider -->
-		<span class="volume"></span> <!-- Volume -->
-	</section>
-</div>
+	<video id="videoem" width="320" height="240" controls>
+		<source src="video/movie.mp4" type="video/mp4">
+		<source src="video/movie.ogg" type="video/ogg">
+		Your browser does not support the video tag.
+	</video>
+	<div id="progressBar" class="progress"><span id="progress" class="progress__bar"></span></div>
+	<div id="controls" style="margin-top: 6px">   
+		<i class="fa fa-play" id="playpause"  onclick="togglePlayPause()" style="cursor:pointer"></i> 
+		<span id="duration"></span>
+		<section>	
+			<span class="tooltip"></span> <!-- Tooltip -->
+			<div id="slider" ></div> <!-- the Slider -->
+			<span class="volume"></span> <!-- Volume -->
+		</section>
+	</div>
 </body>
 <script>
  var video = document.getElementById("videoem");
+ /** disabled the default video control **/
  video.controls = false;
  video.addEventListener("timeupdate", updateProgress, false);
-
+/** to control play and pause events **/
 function togglePlayPause() {
    var playpause = document.getElementById("playpause");
    if (video.paused || video.ended) {
@@ -57,11 +38,10 @@ function togglePlayPause() {
       video.pause();
    }
 }
-
-
 function toggleMute() {
    video.muted = !video.muted;
 }
+/** to control progress bar **/
 function updateProgress() {
    var progress = document.getElementById("progress");
    var value = 0;
@@ -77,10 +57,10 @@ function updateProgress() {
    progress.style.width = value + "%";
 }
 
-try{scrollTo(0,$('#duration').offset().top+50-$(window).height())}catch(e){}
 </script>
 
-	<script>
+<script>
+	/**volume slider controls**/
 		$(function() {
 var video = document.getElementById("videoem");
 			//Store frequently elements in variables
